@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dividend Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Dividend Calculator</h2>
+
+  <label for="shares">Total Shares:</label>
+  <input type="number" id="shares" placeholder="Enter number of shares">
+
+  <button onclick="calculateDividend()">Calculate</button>
+
+  <div class="result" id="result" style="display: none;">
+    <p>Dividend Amount per Share: <strong>0.027</strong></p>
+    <p>Total Dividend: <strong id="dividendValue">0</strong></p>
+    <p>Tax (8%): <strong id="taxValue">0</strong></p>
+    <p>Net Dividend: <strong id="netValue">0</strong></p>
+  </div>
+
+  <script>
+    function calculateDividend() {
+      // Get value from input
+      let shares = document.getElementById("shares").value;
+
+      // Fixed values
+      const dividendPerShare = 0.027;
+      const taxRate = 0.08;
+
+      // Convert to number
+      shares = parseFloat(shares);
+
+      if (isNaN(shares) || shares <= 0) {
+        alert("Please enter a valid number of shares.");
+        return;
+      }
+
+      // Calculations
+      let dividend = shares * dividendPerShare;
+      let tax = dividend * taxRate;
+      let netDividend = dividend - tax;
+
+      // Show results
+      document.getElementById("dividendValue").innerText = dividend.toFixed(2);
+      document.getElementById("taxValue").innerText = tax.toFixed(2);
+      document.getElementById("netValue").innerText = netDividend.toFixed(2);
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
